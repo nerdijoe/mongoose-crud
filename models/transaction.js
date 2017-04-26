@@ -9,7 +9,7 @@ var transactionSchema = new Schema({
   due_date: Date,
   in_date: Date,
   fine: Number,
-  booklist: Array,
+  booklist: [{type: Schema.Types.ObjectId, ref: 'Book'}],
 });
 
 Var Transaction = mongoose.model('Transaction', transactionSchema);
