@@ -1,7 +1,5 @@
 var Book = require('../models/book');
 
-
-
 exports.create = (req, res, next) => {
   var newBook = Book({
     isbn: req.body.isbn,
