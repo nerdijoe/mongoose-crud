@@ -12,6 +12,6 @@ var transactionSchema = new Schema({
   booklist: [{type: Schema.Types.ObjectId, ref: 'Book'}],
 });
 
-Var Transaction = mongoose.model('Transaction', transactionSchema);
+var Transaction = mongoose.model('Transaction', transactionSchema);
 
 module.exports = Transaction;
