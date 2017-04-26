@@ -50,3 +50,42 @@ exports.get_transactions = (req, res, next) => {
     res.send(transactions);
   })
 }
+
+exports.get_transaction = (req, res, next) => {
+  Transaction.find({_id: req.params.id}, (err, transaction) => {
+    if(err) res.send(err);
+
+    res.send(transaction);
+  })
+}
+
+exports.delete = (req, res, next) => {
+  Transaction.findByIdAndRemove( req.params.id, (err, transaction) => {
+    var message = {
+      message: "Transaction has been deleted successfully.",
+      id: transaction._id
+    };
+    res.send(message);
+  })
+}
+
+exports.update = (req, res, next) => {
+  Transaction.findById(req.params.id, (err, transaction) => {
+    if (err) res.send(err);
+
+    transaction.memberid = req.body.memberid || transaction.memberid;
+    transaction.days = req.body.days || transaction.days;
+    transaction.out_date = req.body.out_date || transaction.out_date;
+    transaction.due_date = req.body.due_date || transaction.due_date;
+    transaction.in_date = req.body.in_date || transaction.in_date;
+    transaction.fine = req.body.fine || transaction.fine;
+    transaction.booklist = req.body.booklist || transaction.booklist;
+
+    // after updating the attributes, we need to save it
+    transaction.save( (err, transaction) => {
+      if (err) res.send(err);
+
+      res.send(transaction);
+    })
+
+  })}
